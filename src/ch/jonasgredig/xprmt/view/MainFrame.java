@@ -22,8 +22,6 @@ public class MainFrame extends JFrame {
         BorderLayout layout = new BorderLayout();
         setLayout(layout);
 
-        title.;
-
         add(title, BorderLayout.NORTH);
 
         JPanel xScalePanel = new JPanel();
