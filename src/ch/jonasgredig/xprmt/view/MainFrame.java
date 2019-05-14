@@ -18,7 +18,7 @@ public class MainFrame extends JFrame {
 
     private JButton generateButton = new JButton("Generate Picture");
 
-    private String outputPath = "";
+    private String outputPath = System.getProperty("user.home") + "/Pictures/";
 
     public MainFrame() {
         setTitle(title.getText());
