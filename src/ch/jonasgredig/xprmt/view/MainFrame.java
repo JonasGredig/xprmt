@@ -3,10 +3,8 @@ package ch.jonasgredig.xprmt.view;
 import ch.jonasgredig.xprmt.controller.MainFrameController;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 
 public class MainFrame extends JFrame {
 
@@ -20,7 +18,10 @@ public class MainFrame extends JFrame {
 
     private JButton generateButton = new JButton("Generate Picture");
 
+    private String outputPath = "";
+
     public MainFrame() {
+        setTitle(title.getText());
         BorderLayout layout = new BorderLayout();
         setLayout(layout);
 
@@ -51,16 +52,18 @@ public class MainFrame extends JFrame {
         setVisible(true);
 
         generateButton.addActionListener(a -> {
-                try {
-                    int x = Integer.parseInt(xScaleInput.getText());
-                    int y = Integer.parseInt(yScaleInput.getText());
-                    MainFrameController mfc= new MainFrameController();
-                    mfc.generateRandomPicture(x, y);
-                    xScaleInput.setText("");
-                    yScaleInput.setText("");
-                } catch (Exception exception) {
-                    title.setText("ERROR!");
-                }
+            try {
+                int x = Integer.parseInt(xScaleInput.getText());
+                int y = Integer.parseInt(yScaleInput.getText());
+                MainFrameController mfc = new MainFrameController();
+                BufferedImage image = mfc.generateRandomPicture(x, y);
+                mfc.savePNG(image, outputPath);
+                xScaleInput.setText("");
+                yScaleInput.setText("");
+            } catch (Exception exception) {
+                title.setText("ERROR!");
+                System.out.println(exception);
+            }
         });
     }
 
