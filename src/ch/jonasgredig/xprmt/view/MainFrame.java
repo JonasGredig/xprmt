@@ -50,14 +50,16 @@ public class MainFrame extends JFrame {
         pack();
         setVisible(true);
 
-        generateButton.addActionListener(e -> {
-                try() {
+        generateButton.addActionListener(a -> {
+                try {
                     int x = Integer.parseInt(xScaleInput.getText());
                     int y = Integer.parseInt(yScaleInput.getText());
                     MainFrameController mfc= new MainFrameController();
                     mfc.generateRandomPicture(x, y);
-                } catch () {
-
+                    xScaleInput.setText("");
+                    yScaleInput.setText("");
+                } catch (Exception exception) {
+                    title.setText("ERROR!");
                 }
         });
     }
