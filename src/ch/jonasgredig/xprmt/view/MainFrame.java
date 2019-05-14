@@ -1,5 +1,7 @@
 package ch.jonasgredig.xprmt.view;
 
+import ch.jonasgredig.xprmt.controller.MainFrameController;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -36,7 +38,7 @@ public class MainFrame extends JFrame {
 
 
         JPanel scalePanel = new JPanel();
-        BorderLayout scaleLayout = new BorderLayout();
+        scalePanel.setLayout(new BorderLayout());
         scalePanel.add(xScalePanel, BorderLayout.NORTH);
         scalePanel.add(yScalePanel, BorderLayout.SOUTH);
 
@@ -48,11 +50,15 @@ public class MainFrame extends JFrame {
         pack();
         setVisible(true);
 
-        generateButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        generateButton.addActionListener(e -> {
+                try() {
+                    int x = Integer.parseInt(xScaleInput.getText());
+                    int y = Integer.parseInt(yScaleInput.getText());
+                    MainFrameController mfc= new MainFrameController();
+                    mfc.generateRandomPicture(x, y);
+                } catch () {
 
-            }
+                }
         });
     }
 
