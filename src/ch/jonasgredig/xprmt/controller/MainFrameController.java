@@ -29,8 +29,8 @@ public class MainFrameController {
     public boolean savePNG(BufferedImage image, String path){
         try {
             RenderedImage rendImage = image;
-            ImageIO.write(rendImage, "bmp", new File(path + "FILENAME.bmp"));
-            ImageIO.write(rendImage, "PNG", new File(path + "FILENAME.png"));
+            ImageIO.write(rendImage, "bmp", new File(path + "/FILENAME.bmp"));
+            ImageIO.write(rendImage, "PNG", new File(path + "/FILENAME.png"));
             return true;
         } catch ( IOException e) {
             return false;
