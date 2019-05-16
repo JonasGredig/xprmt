@@ -2,16 +2,18 @@ package ch.jonasgredig.xprmt.view;
 
 import ch.jonasgredig.xprmt.controller.MainFrameController;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 
 public class MainFrame extends JFrame {
 
     private JFileChooser chooser;
-    private JLabel title = new JLabel("XPRMT");
+    private String title = "XPRMT";
 
     private JLabel xScaleInputTitle = new JLabel("X-Scale");
     private JLabel yScaleInputTitle = new JLabel("Y-Scale");
@@ -23,10 +25,12 @@ public class MainFrame extends JFrame {
 
     private JButton generateButton = new JButton("Generate Picture");
     private JButton selectFolderButton = new JButton("Select Folder");
-
+    BufferedImage img;
+    ImageIcon icon = new ImageIcon(img);
 
     public MainFrame() {
-        setTitle(title.getText());
+        setTitle(title);
+        img = ImageIO.read(getClass().getResource("res/img/.gif"));
         BorderLayout layout = new BorderLayout();
         setLayout(layout);
 
