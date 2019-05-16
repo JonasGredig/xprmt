@@ -5,6 +5,8 @@ import ch.jonasgredig.xprmt.controller.MainFrameController;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class MainFrame extends JFrame {
 
@@ -27,6 +29,8 @@ public class MainFrame extends JFrame {
         setTitle(title.getText());
         BorderLayout layout = new BorderLayout();
         setLayout(layout);
+
+        locationInput.setText(System.getProperty("user.home") + "/Desktop/");
 
         add(title, BorderLayout.NORTH);
 
@@ -71,12 +75,18 @@ public class MainFrame extends JFrame {
                 MainFrameController mfc = new MainFrameController();
                 BufferedImage image = mfc.generateRandomPicture(x, y);
                 mfc.savePNG(image, locationInput.getText());
-                xScaleInput.setText("");
-                yScaleInput.setText("");
-            } catch (Exception exception) {
-                title.setText("ERROR!");
-                System.out.println(exception);
+            } catch (FileNotFoundException ioException) {
+                JOptionPane.showMessageDialog(this, "Output path couldn't be found!");
+            } catch (NullPointerException npException) {
+                JOptionPane.showMessageDialog(this, "Output path couldn't be found!");
+            } catch (IOException ioException) {
+                JOptionPane.showMessageDialog(this, "Output path couldn't be found!");
+            } catch (NumberFormatException nfException) {
+                JOptionPane.showMessageDialog(this, "No valid scale numbers");
             }
+
+            xScaleInput.setText("");
+            yScaleInput.setText("");
         });
 
         selectFolderButton.addActionListener(e -> {

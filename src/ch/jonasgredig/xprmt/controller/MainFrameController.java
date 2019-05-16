@@ -26,15 +26,11 @@ public class MainFrameController {
         return res;
     }
 
-    public boolean savePNG(BufferedImage image, String path){
-        try {
+    public boolean savePNG(BufferedImage image, String path) throws IOException {
             RenderedImage rendImage = image;
-            ImageIO.write(rendImage, "bmp", new File(path + "/FILENAME.bmp"));
             ImageIO.write(rendImage, "PNG", new File(path + "/FILENAME.png"));
             return true;
-        } catch ( IOException e) {
-            return false;
-        }
+
     }
 
     private static int getRandomNumberInRange(int min, int max) {
