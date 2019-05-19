@@ -102,7 +102,8 @@ public class MainFrame extends JFrame {
         add(generateButton, BorderLayout.SOUTH);
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new Dimension(200, 100));
+        setMinimumSize(new Dimension(450, 250));
+        setMaximumSize(new Dimension(800, 500));
         setUiDefaults();
         pack();
         setVisible(true);
