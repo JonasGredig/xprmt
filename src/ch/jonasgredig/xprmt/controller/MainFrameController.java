@@ -58,7 +58,6 @@ public class MainFrameController {
     }
 
     private static int getRandomNumberInRange(int min, int max) {
-        // WRONG COLOR ERROR
         if (min >= max) {
             return min;
         }
