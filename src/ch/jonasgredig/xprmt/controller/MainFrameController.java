@@ -50,9 +50,9 @@ public class MainFrameController {
         return res;
     }
 
-    public boolean savePNG(BufferedImage image, String path) throws IOException {
+    public boolean savePNG(BufferedImage image, String path, String format) throws IOException {
             RenderedImage rendImage = image;
-            ImageIO.write(rendImage, "PNG", new File(path + "/FILENAME.png"));
+            ImageIO.write(rendImage, format, new File(path));
             return true;
 
     }
