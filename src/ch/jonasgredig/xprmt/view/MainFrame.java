@@ -23,7 +23,7 @@ public class MainFrame extends JFrame {
     private JTextField yScaleInput = new JTextField();
     private JTextField locationInput = new JTextField();
 
-    private JButton generateButton = new JButton("Generate Picture");
+    private JButton generateButton = new JButton("Generate Image");
     private JButton selectFolderButton = new JButton("Select Folder");
     BufferedImage img;
     ImageIcon icon;
@@ -59,10 +59,17 @@ public class MainFrame extends JFrame {
         locationPanel.add(locationInput, BorderLayout.CENTER);
         locationPanel.add(selectFolderButton, BorderLayout.EAST);
 
+        JCheckBox red = new JCheckBox("Red");
+        JCheckBox green = new JCheckBox("Green");
+        JCheckBox blue = new JCheckBox("Blue");
+
         JPanel scalePanel = new JPanel();
         scalePanel.setLayout(new FlowLayout());
         scalePanel.add(xScalePanel);
         scalePanel.add(yScalePanel);
+        scalePanel.add(red);
+        scalePanel.add(green);
+        scalePanel.add(blue);
 
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new BorderLayout());
@@ -82,7 +89,7 @@ public class MainFrame extends JFrame {
                 int x = Integer.parseInt(xScaleInput.getText());
                 int y = Integer.parseInt(yScaleInput.getText());
                 MainFrameController mfc = new MainFrameController();
-                BufferedImage image = mfc.generateRandomPicture(x, y);
+                BufferedImage image = mfc.generateRandomPicture(x, y, red.isSelected(), green.isSelected(), blue.isSelected());
                 mfc.savePNG(image, locationInput.getText());
             } catch (FileNotFoundException ioException) {
                 JOptionPane.showMessageDialog(this, "Output path couldn't be found!");
@@ -96,6 +103,9 @@ public class MainFrame extends JFrame {
 
             xScaleInput.setText("");
             yScaleInput.setText("");
+            green.setSelected(false);
+            blue.setSelected(false);
+            red.setSelected(false);
         });
 
         selectFolderButton.addActionListener(e -> {
@@ -117,7 +127,6 @@ public class MainFrame extends JFrame {
         try {
             return new ImageIcon(ImageIO.read(new File("res/img/Logo.png")).getScaledInstance(100, -1, Image.SCALE_SMOOTH));
         } catch (Exception e) {
-            e.printStackTrace();
             throw new RuntimeException();
         }
     }

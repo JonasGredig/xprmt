@@ -10,17 +10,33 @@ import java.util.Random;
 
 public class MainFrameController {
 
-    public BufferedImage generateRandomPicture(int xSize, int ySize) {
-        int red = 0;
-        int green = 0;
-        int blue = 0;
+    public BufferedImage generateRandomPicture(int xSize, int ySize, boolean redSelected, boolean greenSelected, boolean blueSelected) {
+        int red_value;
+        int green_value;
+        int blue_value;
+
+        int red_max = 0;
+        int green_max = 0;
+        int blue_max = 0;
+
+        if (redSelected) {
+            red_max = 255;
+        }
+        if (greenSelected) {
+            green_max = 255;
+        }
+        if (blueSelected) {
+            blue_max = 255;
+        }
+
         final BufferedImage res = new BufferedImage( xSize, ySize, BufferedImage.TYPE_INT_RGB );
+
         for (int x = 0; x < xSize; x++){
             for (int y = 0; y < ySize; y++){
-                red = getRandomNumberInRange(0, 255);
-                green = getRandomNumberInRange(0, 255);
-                blue = getRandomNumberInRange(0, 255);
-                res.setRGB(x, y, new Color(red, green, blue).getRGB());
+                red_value = getRandomNumberInRange(0, red_max);
+                green_value = getRandomNumberInRange(0, green_max);
+                blue_value = getRandomNumberInRange(0, blue_max);
+                res.setRGB(x, y, new Color(red_value, green_value, blue_value).getRGB());
             }
         }
         return res;
@@ -34,13 +50,13 @@ public class MainFrameController {
     }
 
     private static int getRandomNumberInRange(int min, int max) {
-
+        // WRONG COLOR ERROR
         if (min >= max) {
-            throw new IllegalArgumentException("max must be greater than min");
+            return 255- min;
         }
 
         Random r = new Random();
-        return r.nextInt((max - min) + 1) + min;
+        return 255 - r.nextInt(max);
     }
 
 }
