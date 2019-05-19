@@ -30,14 +30,17 @@ public class MainFrame extends JFrame {
 
     public MainFrame() {
         setTitle(title);
-        icon = getImage();
-        JPanel titleIconPanel = new JPanel();
-        titleIconPanel.add(new JLabel(icon));
+
         BorderLayout layout = new BorderLayout();
         setLayout(layout);
 
         locationInput.setText(System.getProperty("user.home") + "/Desktop/");
 
+        icon = getImage();
+        JPanel titleIconPanel = new JPanel();
+        JLabel titleImage = new JLabel(icon);
+        titleImage.setMaximumSize(new Dimension(100,50));
+        titleIconPanel.add(titleImage);
         add(titleIconPanel, BorderLayout.NORTH);
 
         JPanel xScalePanel = new JPanel();
@@ -112,7 +115,7 @@ public class MainFrame extends JFrame {
 
     private ImageIcon getImage() {
         try {
-            return new ImageIcon(ImageIO.read(new File("res/img/Logo.png")));
+            return new ImageIcon(ImageIO.read(new File("res/img/Logo.png")).getScaledInstance(100, -1, Image.SCALE_SMOOTH));
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException();
