@@ -148,7 +148,7 @@ public class MainFrame extends JFrame {
                         Object[] options = {
                                 "Cancel",
                                 "Use: " + filenameInput.getText() + "_" + i,
-                                "Overwrite " + filenameInput.getText()
+                                "Overrite " + filenameInput.getText()
                         };
                         int intent = JOptionPane.showOptionDialog(this,
                                 "A file with this name does already exist!",
