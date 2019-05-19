@@ -39,7 +39,7 @@ public class MainFrame extends JFrame {
         icon = getImage();
         JPanel titleIconPanel = new JPanel();
         JLabel titleImage = new JLabel(icon);
-        titleImage.setMaximumSize(new Dimension(100,50));
+        titleImage.setMaximumSize(new Dimension(100, 50));
         titleIconPanel.add(titleImage);
         add(titleIconPanel, BorderLayout.NORTH);
 
@@ -62,6 +62,7 @@ public class MainFrame extends JFrame {
         JCheckBox red = new JCheckBox("Red");
         JCheckBox green = new JCheckBox("Green");
         JCheckBox blue = new JCheckBox("Blue");
+        JCheckBox chrono = new JCheckBox("Black/White");
 
         JPanel scalePanel = new JPanel();
         scalePanel.setLayout(new FlowLayout());
@@ -70,6 +71,7 @@ public class MainFrame extends JFrame {
         scalePanel.add(red);
         scalePanel.add(green);
         scalePanel.add(blue);
+        scalePanel.add(chrono);
 
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new BorderLayout());
@@ -84,12 +86,28 @@ public class MainFrame extends JFrame {
         pack();
         setVisible(true);
 
+        chrono.addActionListener(a -> {
+            if (chrono.isSelected()) {
+                red.setSelected(false);
+                green.setSelected(false);
+                blue.setSelected(false);
+                red.setEnabled(false);
+                green.setEnabled(false);
+                blue.setEnabled(false);
+
+            } else {
+                red.setEnabled(true);
+                green.setEnabled(true);
+                blue.setEnabled(true);
+            }
+        });
+
         generateButton.addActionListener(a -> {
             try {
                 int x = Integer.parseInt(xScaleInput.getText());
                 int y = Integer.parseInt(yScaleInput.getText());
                 MainFrameController mfc = new MainFrameController();
-                BufferedImage image = mfc.generateRandomPicture(x, y, red.isSelected(), green.isSelected(), blue.isSelected());
+                BufferedImage image = mfc.generateRandomPicture(x, y, red.isSelected(), green.isSelected(), blue.isSelected(), chrono.isSelected());
                 mfc.savePNG(image, locationInput.getText());
             } catch (FileNotFoundException ioException) {
                 JOptionPane.showMessageDialog(this, "Output path couldn't be found!");

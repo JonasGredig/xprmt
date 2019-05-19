@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class MainFrameController {
 
-    public BufferedImage generateRandomPicture(int xSize, int ySize, boolean redSelected, boolean greenSelected, boolean blueSelected) {
+    public BufferedImage generateRandomPicture(int xSize, int ySize, boolean redSelected, boolean greenSelected, boolean blueSelected, boolean chronoSelected) {
         int red_value;
         int green_value;
         int blue_value;
@@ -33,9 +33,17 @@ public class MainFrameController {
 
         for (int x = 0; x < xSize; x++){
             for (int y = 0; y < ySize; y++){
-                red_value = getRandomNumberInRange(0, red_max);
-                green_value = getRandomNumberInRange(0, green_max);
-                blue_value = getRandomNumberInRange(0, blue_max);
+                if (chronoSelected) {
+                    int value = getRandomNumberInRange(0, 255);
+                    red_value = value;
+                    green_value = value;
+                    blue_value = value;
+                } else {
+                    red_value = getRandomNumberInRange(0, red_max);
+                    green_value = getRandomNumberInRange(0, green_max);
+                    blue_value = getRandomNumberInRange(0, blue_max);
+                }
+
                 res.setRGB(x, y, new Color(red_value, green_value, blue_value).getRGB());
             }
         }
@@ -52,11 +60,11 @@ public class MainFrameController {
     private static int getRandomNumberInRange(int min, int max) {
         // WRONG COLOR ERROR
         if (min >= max) {
-            return 255- min;
+            return min;
         }
 
         Random r = new Random();
-        return 255 - r.nextInt(max);
+        return r.nextInt(max);
     }
 
 }
