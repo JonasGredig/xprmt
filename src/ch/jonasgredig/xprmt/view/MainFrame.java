@@ -6,9 +6,9 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URL;
 
 public class MainFrame extends JFrame {
 
@@ -26,17 +26,19 @@ public class MainFrame extends JFrame {
     private JButton generateButton = new JButton("Generate Picture");
     private JButton selectFolderButton = new JButton("Select Folder");
     BufferedImage img;
-    ImageIcon icon = new ImageIcon(img);
+    ImageIcon icon;
 
     public MainFrame() {
         setTitle(title);
-        img = ImageIO.read(getClass().getResource("res/img/.gif"));
+        icon = getImage();
+        JPanel titleIconPanel = new JPanel();
+        titleIconPanel.add(new JLabel(icon));
         BorderLayout layout = new BorderLayout();
         setLayout(layout);
 
         locationInput.setText(System.getProperty("user.home") + "/Desktop/");
 
-        add(title, BorderLayout.NORTH);
+        add(titleIconPanel, BorderLayout.NORTH);
 
         JPanel xScalePanel = new JPanel();
         xScalePanel.setLayout(new BorderLayout());
@@ -101,12 +103,20 @@ public class MainFrame extends JFrame {
             chooser.setAcceptAllFileFilterUsed(false);
             //
             if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-                        this.locationInput.setText(chooser.getSelectedFile().getPath());
-            }
-            else {
+                this.locationInput.setText(chooser.getSelectedFile().getPath());
+            } else {
                 System.out.println("No Selection ");
             }
         });
+    }
+
+    private ImageIcon getImage() {
+        try {
+            return new ImageIcon(ImageIO.read(new File("res/img/Logo.png")));
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
     }
 
 }
