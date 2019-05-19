@@ -134,10 +134,20 @@ public class MainFrame extends JFrame {
                     boolean exists = tmpDir.exists();
                     if (!exists) {
                         mfc.savePNG(image, locationInput.getText() + "/" + filenameInput.getText() + fileType.getSelectedItem(), fileType.getSelectedItem().toString().substring(1));
+                        JOptionPane.showMessageDialog(this, "Image successfully generated!", "Successfull!", JOptionPane.INFORMATION_MESSAGE);
+
                     } else {
+                        int i = 0;
+                        boolean exists2 = true;
+                        File tmpDir2;
+                        while (exists2){
+                            i++;
+                            tmpDir2 = new File(locationInput.getText() + "/" + filenameInput.getText() + "_" + i + fileType.getSelectedItem());
+                            exists2 = tmpDir2.exists();
+                        }
                         Object[] options = {
                                 "Cancel",
-                                "Use: " + filenameInput.getText() + "1",
+                                "Use: " + filenameInput.getText() + "_" + i,
                                 "Overwrite " + filenameInput.getText()
                         };
                         int intent = JOptionPane.showOptionDialog(this,
@@ -152,7 +162,7 @@ public class MainFrame extends JFrame {
                             mfc.savePNG(image, locationInput.getText() + "/" + filenameInput.getText() + fileType.getSelectedItem(), fileType.getSelectedItem().toString().substring(1));
                             JOptionPane.showMessageDialog(this, "Image successfully generated!", "Successfull!", JOptionPane.INFORMATION_MESSAGE);
                         } else if (intent == 1) {
-                            mfc.savePNG(image, locationInput.getText() + "/" + filenameInput.getText() + "1" + fileType.getSelectedItem(), fileType.getSelectedItem().toString().substring(1));
+                            mfc.savePNG(image, locationInput.getText() + "/" + filenameInput.getText() + "_" + i + fileType.getSelectedItem(), fileType.getSelectedItem().toString().substring(1));
                             JOptionPane.showMessageDialog(this, "Image successfully generated!", "Successfull!", JOptionPane.INFORMATION_MESSAGE);
 
                         }
