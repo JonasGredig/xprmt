@@ -44,7 +44,6 @@ public class MainFrame extends JFrame {
         icon = getImage();
         JPanel titleIconPanel = new JPanel();
         JLabel titleImage = new JLabel(icon);
-        titleImage.setMaximumSize(new Dimension(100, 50));
         titleIconPanel.add(titleImage);
         add(titleIconPanel, BorderLayout.NORTH);
 
