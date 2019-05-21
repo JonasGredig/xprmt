@@ -1,4 +1,4 @@
-package ch.jonasgredig.xprmt.controller;
+package ch.jonasgredig.xprmt.helper;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
-public class MainFrameController {
+public class ImageGenerator {
 
     public BufferedImage generateRandomPicture(int xSize, int ySize, boolean redSelected, boolean greenSelected, boolean blueSelected, boolean chronoSelected) {
         int red_value;
